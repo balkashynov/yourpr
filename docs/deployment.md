@@ -26,6 +26,7 @@ For multiple replicas, disable the in-process refresher and move ingestion into 
 4. Deploy. Changing a `VITE_` variable requires a new frontend build.
 5. Confirm `/api/data/status` reports `refresh_enabled: true` and a recent successful refresh. The footer shows the IRCC check date and warns if saved data is being used. Check the API URL and exact CORS origin if updates are unavailable.
 6. Set `VITE_REPOSITORY_URL` to the actual GitHub repository URL to show the footer link. It stays hidden while unset; no placeholder repository is published.
+7. Enable **Web Analytics** in the YourPR project's Vercel dashboard. The frontend includes `@vercel/analytics/react`; no API key is required. The six hash views are reported as fixed paths such as `/overview` and `/pool`, with automatic tracking disabled to avoid duplicate page views. Development mode logs events without sending visits. Production events exclude calculator inputs, CRS scores, query strings, and URL fragments.
 
 The app’s six views use hash routes (`#draws`, `#pool`, etc.), so no catch-all rewrite is necessary and direct share/reload works. Fonts are self-hosted. Security response headers are in `frontend/vercel.json`. No build-time network fetch of IRCC is required.
 

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Analytics, type BeforeSend } from '@vercel/analytics/react'
 import {
   Activity,
   ArrowRight,
@@ -31,6 +32,12 @@ import { utcDay } from './runtime'
 import Distribution from './Distribution'
 
 const bundled = bundleSchema.parse(snapshot)
+const analyticsBeforeSend: BeforeSend = (event) => {
+  const url = new URL(event.url)
+  url.search = ''
+  url.hash = ''
+  return { ...event, url: url.toString() }
+}
 const pages = [
   { id: 'overview', name: 'Overview', icon: LayoutGrid },
   { id: 'draws', name: 'Draw history', icon: TrendingUp },
@@ -149,6 +156,12 @@ export default function App() {
   const pageName = pages.find((p) => p.id === page)?.name
   return (
     <div className="app-shell">
+      <Analytics
+        mode={import.meta.env.PROD ? 'production' : 'development'}
+        route={`/${page}`}
+        path={`/${page}`}
+        beforeSend={analyticsBeforeSend}
+      />
       <a
         href="#main"
         className="skip-link"
@@ -559,6 +572,11 @@ export default function App() {
                   disclaims liability for losses or damages arising from use of, or reliance on,
                   this service. Your calculator answers are processed in your browser and are not
                   sent to our server or stored after a reload.
+                </p>
+                <p>
+                  We use Vercel Web Analytics to measure visits and page views without cookies.
+                  Calculator answers and CRS scores are not included in analytics. Query strings
+                  and URL fragments are removed from analytics page URLs.
                 </p>
               </details>
             </div>

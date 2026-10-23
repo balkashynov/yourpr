@@ -137,7 +137,7 @@ See [the deployment guide](docs/deployment.md) for exact setup, freshness behavi
 }
 ```
 
-The public website calculates scenarios locally; it does not send the visitor’s CRS score to the API or store it. API clients may opt into the stateless POST route. No analytics, accounts, cookies, or user-contributed outcome collection are included.
+The public website calculates scenarios locally; it does not send the visitor’s CRS score to the API or store it. API clients may opt into the stateless POST route. Vercel Web Analytics measures visits and page views without cookies. Only the six fixed page names are tracked; calculator answers and CRS scores are not included, and query strings and fragments are stripped from analytics page URLs. No accounts or user-contributed outcome collection are included.
 
 ## Sources and scientific scope
 

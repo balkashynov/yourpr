@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.6",
     "@fontsource/manrope": "^5.2.8",
+    "@vercel/analytics": "^2.0.1",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
