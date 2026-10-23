@@ -64,3 +64,15 @@ Deployment references checked October 21, 2026: [Railway monorepos](https://docs
 - Both public HTTPS origins returned 200 without login. The API allowed the deployed origin and reported a successful live IRCC refresh with `stale: false`.
 
 No custom domain has been connected. Adding `yourpr.ca` later requires configuring its DNS/provider domain and adding its exact HTTPS origin to Railway CORS. Scoring rules still require explicit human verification when they change; the draw feed cannot update calculator legislation.
+
+### Repository deployments
+
+The Vercel project is configured with repository root `frontend`; Railway uses `/backend`, its Dockerfile, `/health`, and backend-only watch paths. Source connection state can be checked in each project's dashboard. Local provider link files and credentials are gitignored.
+
+For manual Vercel deployments after linking, run from the repository root with an explicit project:
+
+```sh
+vercel deploy --prod --project yourpr --scope swagsters-projects-daccc539
+```
+
+For Railway, link this repository to the dedicated YourPR project and service, then run `railway up` from the repository root. The service's configured root selects `backend`. Do not use the old backend-only upload once the root is configured as `/backend`.

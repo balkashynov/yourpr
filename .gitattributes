@@ -1,0 +1,2 @@
+# Preserve the exact bytes of SHA-256-addressed official source evidence.
+backend/data/raw/*.json -text -diff
