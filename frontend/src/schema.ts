@@ -111,7 +111,7 @@ export type Draw = z.infer<typeof drawSchema>
 export type Pool = z.infer<typeof poolSchema>
 export type ScenarioInput = {
   crs_score: number
-  first_draw_date?: string
+  first_draw_date?: string | null
   draw_size: number
   interval_days: number
   horizon_draws: number
