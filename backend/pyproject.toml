@@ -1,0 +1,13 @@
+[project]
+name = "yourpr-ee-api"
+version = "1.0.0"
+description = "Reproducible Express Entry data and conditional scenario API"
+requires-python = ">=3.12"
+dependencies = ["fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1", "httpx>=0.28,<1", "numpy>=2.2,<3", "scipy>=1.15,<2"]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

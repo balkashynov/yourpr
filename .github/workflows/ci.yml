@@ -1,0 +1,32 @@
+name: Verify
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.7.13'
+          enable-cache: true
+      - run: make setup
+      - name: Rebuild data from pinned evidence without network
+        run: make reproduce
+      - name: Verify committed data is reproducible
+        run: git diff --exit-code -- backend/data/snapshot.json frontend/src/data/snapshot.json frontend/src/data/scenario-reference.json
+      - run: make verify
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frontend-production
+          path: frontend/dist
